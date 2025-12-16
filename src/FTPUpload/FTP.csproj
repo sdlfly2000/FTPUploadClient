@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="FluentFTP" Version="53.0.2" />
+    <PackageReference Include="IdeaActivator.Common.Core" Version="1.1.17" />
+    <PackageReference Include="System.CommandLine" Version="2.0.1" />
   </ItemGroup>
 
 </Project>
