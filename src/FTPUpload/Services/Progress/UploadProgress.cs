@@ -9,7 +9,7 @@ public class UploadProgress : IProgress<FtpProgress>
     public void Report(FtpProgress value)
     {
         ClearCurrentline();
-        Console.Write($"Uploaded: {value.Progress}, Speed: {value.TransferSpeed}, ETA: {value.ETA}");
+        Console.Write($"Uploaded: {value.Progress:F1}%, Speed: {value.TransferSpeedToString()}, ETA: {value.ETA:hh\\:mm\\:ss}");
     }
 
     private void ClearCurrentline()

@@ -16,6 +16,7 @@ public class FTPService : IFTPService
     public async Task Upload(string host, string userName, string pwd, string remotePath, string localFilePath)
     {
         using var client = new AsyncFtpClient(host, userName, pwd);
+        client.Config.SelfConnectMode= FtpSelfConnectMode.Always;
         var status = await client.UploadFile(localFilePath, remotePath, progress: _progress).ConfigureAwait(false);
     }
 

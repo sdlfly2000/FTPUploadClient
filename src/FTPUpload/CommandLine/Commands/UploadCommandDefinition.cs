@@ -12,7 +12,7 @@ public class UploadCommandDefinition : ICommandDefinition
     private Option<string>? _userNameOption;
     private Option<string>? _pwdOption;
     private Option<string>? _remotePath;
-    private Option<string>? _localFilePathOption;
+    private Option<string>? _localFileOption;
 
     private readonly IFTPService _ftpService;
 
@@ -23,8 +23,6 @@ public class UploadCommandDefinition : ICommandDefinition
 
     public Command Create()
     {
-        var uploadCommand = new Command("upload", "operation on image");
-
         _hostOption = new Option<string>("--host", "-h")
         {
             Required = true,
@@ -49,10 +47,19 @@ public class UploadCommandDefinition : ICommandDefinition
             Description = "path on FTP Server"
         };
 
-        _localFilePathOption = new Option<string>("--localFilePath", "-l")
+        _localFileOption = new Option<string>("--localFile", "-l")
         {
             Required = true,
             Description = "local file path to upload"
+        };
+
+        var uploadCommand = new Command("upload", "operation on image")
+        {
+            _hostOption,
+            _userNameOption,
+            _pwdOption,
+            _remotePath,
+            _localFileOption
         };
 
         uploadCommand.SetAction(Action);
@@ -66,13 +73,13 @@ public class UploadCommandDefinition : ICommandDefinition
         Debug.Assert(_userNameOption is not null);
         Debug.Assert(_pwdOption is not null);
         Debug.Assert(_remotePath is not null);
-        Debug.Assert(_localFilePathOption is not null);
+        Debug.Assert(_localFileOption is not null);
 
         var host = parseResult.GetResult(_hostOption)?.GetValueOrDefault<string>() ?? string.Empty;
         var userName = parseResult.GetResult(_userNameOption)?.GetValueOrDefault<string>() ?? string.Empty;
         var pwd = parseResult.GetResult(_pwdOption)?.GetValueOrDefault<string>() ?? string.Empty;
         var remotePath = parseResult.GetResult(_remotePath)?.GetValueOrDefault<string>() ?? string.Empty;
-        var localFilePath = parseResult.GetResult(_localFilePathOption)?.GetValueOrDefault<string>() ?? string.Empty;
+        var localFilePath = parseResult.GetResult(_localFileOption)?.GetValueOrDefault<string>() ?? string.Empty;
 
         await _ftpService.Upload(host, userName, pwd, remotePath, localFilePath)
             .ConfigureAwait(false);
