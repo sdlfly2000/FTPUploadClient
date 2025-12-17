@@ -6,7 +6,7 @@ using FTP;
 using Microsoft.Extensions.DependencyInjection;
 
 var serviceCollection = new ServiceCollection();
-serviceCollection.RegisterDomain("FTP");
+serviceCollection.RegisterDomain("FTPClient");
 
 using var serviceProvider = serviceCollection.BuildServiceProvider();
 var worker = serviceProvider.GetRequiredService<Worker>();
