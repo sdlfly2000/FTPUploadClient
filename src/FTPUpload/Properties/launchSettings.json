@@ -2,7 +2,7 @@
   "profiles": {
     "FTP": {
       "commandName": "Project",
-      "commandLineArgs": "upload --host homeserver2 --userName sdlfly2000 --password sdl@1215 --remotePath Projects/AuthenticationService/AuthService.zip --localFile AuthService.zip"
+      "commandLineArgs": "upload --host homeserver2 --userName devops --password sdl@1215 --remotePath Projects/AuthenticationService/AuthService.zip --localFile ../Build/AuthService.zip"
     }
   }
 }
